@@ -10,15 +10,20 @@ import {
   Pressable,
 } from 'react-native';
 
-
 import React, {useState} from 'react';
 
-import {useNavigation} from '@react-navigation/native';
+import {CommonActions, useNavigation} from '@react-navigation/native';
 
 import {check, PERMISSIONS, request} from 'react-native-permissions';
 
 const Main = () => {
   const [roomId, setRoomId] = useState('');
+
+  const [token, setToken] = useState('');
+
+  const [userName, setUserName] = useState("")
+
+  const [userId, setUserId] = useState("")
 
   const navigation = useNavigation();
 
@@ -55,14 +60,10 @@ const Main = () => {
   };
 
   const handleJoin = () => {
-    console.log(roomId);
-
-    if(roomId?.length <= 3) {
-      console.log("fuckOff")
-      return
-    }
-
-    navigation.navigate("videoCall", {roomId})
+  
+    console.log(token, roomId, userName, userId)
+  
+    navigation.navigate('videoCall', {roomId, userId ,token, userName});
     setRoomId('');
   };
 
@@ -72,7 +73,27 @@ const Main = () => {
         style={styles.inputs}
         placeholder="Room ID"
         value={roomId}
-        onChangeText={t => setRoomId(t.replace(/[^a-zA-Z]/g, ''))}
+        onChangeText={t => setRoomId(t)}
+      />
+
+      <TextInput
+        style={styles.inputs}
+        placeholder="Token"
+        value={token}
+        onChangeText={t => setToken(t)}
+      />
+
+      <TextInput
+        style={styles.inputs}
+        placeholder="User ID"
+        value={userId}
+        onChangeText={t => setUserId(t)}
+      />
+      <TextInput
+        style={styles.inputs}
+        placeholder="User name"
+        value={userName}
+        onChangeText={t => setUserName(t)}
       />
 
       <Pressable style={styles.buttonWrapper} onPress={handleJoin}>
@@ -88,7 +109,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // backgroundColor: '#efecec',
-    backgroundColor : "#0c2d57",
+    backgroundColor: '#0c2d57',
     alignItems: 'center',
     flexDirection: 'column',
     gap: 20,
@@ -99,11 +120,11 @@ const styles = StyleSheet.create({
     borderColor: '#efecec',
     paddingVertical: 6,
     paddingHorizontal: 12,
-    backgroundColor : "#efecec",
+    backgroundColor: '#efecec',
     fontWeight: '600',
     width: 300,
     borderRadius: 20,
-    color : "#282828"
+    color: '#282828',
   },
   wrapper: {
     borderWidth: 1,

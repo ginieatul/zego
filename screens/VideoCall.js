@@ -100,19 +100,18 @@ const VideoCall = ({route}) => {
         },
       );
 
+
       let roomConfig = new ZegoRoomConfig();
 
       roomConfig.isUserStatusNotify = true;
 
+      roomConfig.token = route?.params?.token
+
       engine.loginRoom(
         route?.params?.roomId,
         {
-          userID: String(
-            Math.floor(Math.random() * (99999 - 1000 + 1000)) + 1000,
-          ),
-          userName: String(
-            Math.floor(Math.random() * (99999 - 1000 + 1000)) + 1000,
-          ),
+          userID: route?.params?.userId,
+          userName: route?.params?.userName,
         },
         roomConfig,
       );
@@ -141,7 +140,7 @@ const VideoCall = ({route}) => {
         ZegoExpressEngine.destroyEngine();
       }
     };
-  }, [previewViewRef.current, route?.params?.roomId]);
+  }, [previewViewRef.current, route?.params]);
 
   return (
     <View style={styles.contianer}>
