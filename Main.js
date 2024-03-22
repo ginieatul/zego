@@ -63,9 +63,10 @@ const Main = () => {
   
     console.log(token, roomId, userName, userId)
   
-    navigation.navigate('videoCall', {roomId, userId ,token, userName});
+    navigation.navigate('videoCall', {roomId : "creator1000", userId ,token, userName});
     setRoomId('');
   };
+
 
   return (
     <View style={styles.container}>

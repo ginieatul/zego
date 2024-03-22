@@ -36,10 +36,11 @@ const VideoCall = ({route}) => {
 
   useEffect(() => {
     console.log('componentDidMount');
+  
     let profile = {
-      appID: 1310828580,
+      appID: 1996434501,
       appSign:
-        '1b377f4531003675751507b9937e6d2b1ac735399271af41bcdfaab60c48f5d0',
+        '5b8d13eb6cc351e379ca6da233a9884a6a109ce87b64bdb22ee9e0245df19c16',
       scenario: ZegoScenario.Broadcast,
     };
 
@@ -73,6 +74,13 @@ const VideoCall = ({route}) => {
           streamList,
           `roomStreamUpdate*** ${Platform.OS}`,
         );
+
+
+        engine.on('roomTokenWillExpire', (x) => {
+          console.log("Token will expire", x)
+        })
+
+
 
         if (streamList?.length > 0) {
           engine.stopPreview().then(() => {
