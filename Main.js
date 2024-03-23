@@ -58,6 +58,7 @@ const Main = () => {
       navigation.navigate('videoCall', {type, streamId: createRoomId});
     }
   };
+ 
 
   const handleJoin = () => {
   

@@ -27,6 +27,8 @@ const VideoCall = ({route}) => {
     console.log(x);
   };
 
+
+
   const handleEndStream = async () => {
     console.log('End Stream');
     let x = await ZegoExpressEngine.instance().stopPublishingStream();
@@ -77,10 +79,11 @@ const VideoCall = ({route}) => {
 
 
         engine.on('roomTokenWillExpire', (x) => {
-          console.log("Token will expire", x)
+          console.log("Token will expire", x, Platform.OS)
+
         })
 
-
+        // engine.renewToken()
 
         if (streamList?.length > 0) {
           engine.stopPreview().then(() => {
